@@ -8,11 +8,17 @@ describe ToyRobot do
   let(:input) { double(IO) }
 
   context "When the input IO stream returns some commands and ends on nil" do
+    let(:interpreter) { double(Interpreter) }
+
     before do
-      allow(input).to receive(:gets).and_return("one", "two", "three", nil)
+      allow(input).to receive(:gets).and_return("a", "b", "c", nil)
+      allow(Interpreter).to receive(:new).and_return(interpreter)
+      allow(interpreter).to receive(:process).with("a").and_return "one"
+      allow(interpreter).to receive(:process).with("b").and_return "two"
+      allow(interpreter).to receive(:process).with("c").and_return "three"
     end
 
-    it "echoes the input until it encounters nil" do
+    it "outputs the response from the interpreter until it encounters nil" do
       output = StringIO.new
       ToyRobot.new(input, output).run
       expect(output.string).to eq "one\ntwo\nthree\n"
