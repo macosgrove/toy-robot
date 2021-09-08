@@ -1,15 +1,16 @@
 # frozen_string_literal: true
 
-# Entry point. Responsible for running the input loop.
+# Entry point. Responsible for system intialisation and running the input loop.
 class ToyRobot
   def initialize(input_stream, output_stream)
     @input = input_stream
     @output = output_stream
+    @interpreter = Interpreter.new
   end
 
   def run
-    while (line = input.gets)
-      output.puts(line)
+    while (command = input.gets)
+      output.puts(@interpreter.process(command))
     end
   end
 
