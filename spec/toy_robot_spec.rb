@@ -6,6 +6,9 @@ require_relative "../lib/toy_robot"
 
 describe ToyRobot do
   let(:input) { double(IO) }
+  let(:output) { StringIO.new }
+
+  subject(:toy_robot) { described_class.new(input, output) }
 
   context "When the input IO stream returns some commands and ends on nil" do
     let(:interpreter) { double(Interpreter) }
@@ -19,8 +22,7 @@ describe ToyRobot do
     end
 
     it "outputs the response from the interpreter until it encounters nil" do
-      output = StringIO.new
-      ToyRobot.new(input, output).run
+      toy_robot.run
       expect(output.string).to eq "one\ntwo\nthree\n"
     end
   end

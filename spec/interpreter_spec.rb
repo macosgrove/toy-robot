@@ -3,7 +3,8 @@
 require_relative "../lib/interpreter"
 
 describe Interpreter do
-  subject(:interpreter) { Interpreter.new }
+  subject(:interpreter) { described_class.new }
+
   it "echoes the command" do
     expect(interpreter.process("test")).to eq "test"
   end
