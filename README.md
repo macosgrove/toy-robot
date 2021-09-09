@@ -80,3 +80,22 @@ MOVE
 REPORT
 ```
 Output: `3,3,NORTH`
+
+### Extensions
+
+The following extension commands have been implemented:
+
+  QUIT - terminate the application
+
+### Further extensions
+
+Here are some ideas for additional commands:
+
+  HELP - list all available commands
+  MAP - show a map of the table top
+  MAP_ON - always show the map after each command
+  MAP_OFF - stop showing the map after each command
+  REPORT_ON - always report after each command
+  REPORT_OFF - stop reporting after each command
+  OBSTACLE x,y - place an obstacle (coffee cup, vase of flowers) at a location on the table
+  

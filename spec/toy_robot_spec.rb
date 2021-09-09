@@ -11,7 +11,7 @@ describe ToyRobot do
   subject(:toy_robot) { described_class.new(input, output) }
 
   context "When the input IO stream returns some commands and ends on nil" do
-    let(:interpreter) { double(Interpreter) }
+    let(:interpreter) { double(Interpreter, add_handler: nil) }
 
     before do
       allow(input).to receive(:gets).and_return("a", "b", "c", nil)
