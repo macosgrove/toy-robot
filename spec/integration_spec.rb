@@ -20,4 +20,17 @@ describe "Application integration" do
       expect(output.string).to eq "0,0,NORTH\n"
     end
   end
+
+  context "When location and direction are specified for the PLACE" do
+    before do
+      input.puts "PLACE 1,5,EAST"
+      input.puts "REPORT"
+      input.rewind
+    end
+
+    it "places the robot according to the parameters" do
+      toy_robot.run
+      expect(output.string).to eq "1,5,EAST\n"
+    end
+  end
 end
