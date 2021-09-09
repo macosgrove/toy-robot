@@ -10,6 +10,14 @@ class Robot
     nil
   end
 
+  def move
+    raise RobotCommandError, "Robot's position is undefined. PLACE the robot first." unless placed?
+
+    @x += MOVE_VECTORS[@facing][0]
+    @y += MOVE_VECTORS[@facing][1]
+    nil
+  end
+
   def report
     raise RobotCommandError, "Robot's position is undefined. PLACE the robot first." unless placed?
 
@@ -32,4 +40,12 @@ class Robot
       raise RobotCommandError, "Robot does not understand direction [#{facing}]."
     end
   end
+
+  MOVE_VECTORS =
+    {
+      north: [0, 1],
+      east: [1, 0],
+      south: [0, -1],
+      west: [-1, 0]
+    }.freeze
 end

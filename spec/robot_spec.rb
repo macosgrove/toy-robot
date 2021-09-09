@@ -28,11 +28,18 @@ describe Robot do
     it "reports its location" do
       expect(robot.report).to eq "1,5,WEST"
     end
+
+    it "can be moved to a valid location" do
+      robot.move
+      expect(robot.report).to eq "0,5,WEST"
+    end
   end
 
   context "Before the robot has been PLACEd" do
-    it "raises an exception if REPORT is attempted" do
-      expect { robot.report }.to raise_error "Robot's position is undefined. PLACE the robot first."
+    %i[report move].each do |command|
+      it "raises an exception if #{command} is attempted" do
+        expect { robot.send(command) }.to raise_error "Robot's position is undefined. PLACE the robot first."
+      end
     end
   end
 end
