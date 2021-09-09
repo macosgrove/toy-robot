@@ -98,4 +98,6 @@ Here are some ideas for additional commands:
   REPORT_ON - always report after each command
   REPORT_OFF - stop reporting after each command
   OBSTACLE x,y - place an obstacle (coffee cup, vase of flowers) at a location on the table
+  VERBOSE_ON - report errors in the output
+  VERBOSE_OFF - ignore errors
   

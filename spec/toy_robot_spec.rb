@@ -25,5 +25,27 @@ describe ToyRobot do
       toy_robot.run
       expect(output.string).to eq "one\ntwo\nthree\n"
     end
+
+    context "When the command causes an error" do
+      before { allow(interpreter).to receive(:process).with("b").and_raise "Robot error" }
+
+      context "and verbose is turned on" do
+        before { toy_robot.verbose = true }
+
+        it "reports the error to the output and continues processing" do
+          toy_robot.run
+          expect(output.string).to eq "one\nRobot error\nthree\n"
+        end
+      end
+
+      context "and verbose is turned off" do
+        before { toy_robot.verbose = false }
+
+        it "ignores the error and continues processing" do
+          toy_robot.run
+          expect(output.string).to eq "one\nthree\n"
+        end
+      end
+    end
   end
 end
