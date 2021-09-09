@@ -13,6 +13,14 @@ describe Interpreter do
     it "invokes the command on the handler and returns the response" do
       expect(interpreter.process("test")).to eq "Test response"
     end
+
+    it "strips off newline characters if any" do
+      expect(interpreter.process("test\n")).to eq "Test response"
+    end
+
+    it "is not case sensitive" do
+      expect(interpreter.process("TEST")).to eq "Test response"
+    end
   end
 
   context "when the interpreter does not have a handler for the command" do
