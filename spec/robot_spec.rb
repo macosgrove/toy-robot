@@ -10,7 +10,7 @@ describe Robot do
       expect(robot.place(0, 0, :north)).to be_nil
     end
 
-    [[1, 3, :east], ["1", 3, "EAST"], [1, "3", "E"], %w[1 3 east], [1, 3, "e"]].each do |args|
+    [[1, 3, :east], ["1", 3, "EAST"], [1, "3", "E"], ["1", "3", "east"], [1, 3, "e"]].each do |args| # rubocop:disable Style/WordArray
       it "is liberal in what it accepts" do
         robot.place(*args)
         expect(robot.report).to eq "1,3,EAST"
@@ -33,10 +33,15 @@ describe Robot do
       robot.move
       expect(robot.report).to eq "0,5,WEST"
     end
+
+    it "can turn left" do
+      robot.left
+      expect(robot.report).to eq "1,5,SOUTH"
+    end
   end
 
   context "Before the robot has been PLACEd" do
-    %i[report move].each do |command|
+    %i[report move left].each do |command|
       it "raises an exception if #{command} is attempted" do
         expect { robot.send(command) }.to raise_error "Robot's position is undefined. PLACE the robot first."
       end

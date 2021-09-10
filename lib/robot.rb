@@ -18,6 +18,13 @@ class Robot
     nil
   end
 
+  def left
+    raise RobotCommandError, "Robot's position is undefined. PLACE the robot first." unless placed?
+
+    @facing = COMPASS[turn(LEFT)]
+    nil
+  end
+
   def report
     raise RobotCommandError, "Robot's position is undefined. PLACE the robot first." unless placed?
 
@@ -41,6 +48,10 @@ class Robot
     end
   end
 
+  def turn(direction)
+    (COMPASS.index(@facing) + direction) % 4
+  end
+
   MOVE_VECTORS =
     {
       north: [0, 1],
@@ -48,4 +59,7 @@ class Robot
       south: [0, -1],
       west: [-1, 0]
     }.freeze
+
+  COMPASS = %i[north east south west].freeze
+  LEFT = -1
 end

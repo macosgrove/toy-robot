@@ -46,7 +46,7 @@ describe "Application integration" do
       expect(output.string).to eq "0,1,NORTH\n"
     end
 
-    xit "passes example (b)" do
+    it "passes example (b)" do
       input.puts "PLACE 0,0,NORTH"
       input.puts "LEFT"
       input.puts "REPORT"
@@ -57,7 +57,7 @@ describe "Application integration" do
       expect(output.string).to eq "0,0,WEST\n"
     end
 
-    xit "passes example (c)" do
+    it "passes example (c)" do
       input.puts "PLACE 1,2,EAST"
       input.puts "MOVE"
       input.puts "MOVE"
