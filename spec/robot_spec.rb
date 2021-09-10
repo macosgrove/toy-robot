@@ -38,6 +38,11 @@ describe Robot do
       robot.left
       expect(robot.report).to eq "1,5,SOUTH"
     end
+
+    it "can turn right" do
+      robot.right
+      expect(robot.report).to eq "1,5,NORTH"
+    end
   end
 
   context "Before the robot has been PLACEd" do
