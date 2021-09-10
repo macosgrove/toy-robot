@@ -71,4 +71,25 @@ describe "Application integration" do
       expect(output.string).to eq "3,3,NORTH\n"
     end
   end
+
+  describe "More complex examples" do
+    before { toy_robot.verbose = true }
+    it "can turn right as well as left" do
+      input.puts "PLACE 1,2,EAST"
+      input.puts "MOVE"
+      input.puts "MOVE"
+      input.puts "RIGHT"
+      input.puts "MOVE"
+      input.puts "RIGHT"
+      input.puts "MOVE"
+      input.puts "LEFT"
+      input.puts "MOVE"
+      input.puts "REPORT"
+
+      input.rewind
+      toy_robot.run
+
+      expect(output.string).to eq "2,0,SOUTH\n"
+    end
+  end
 end
