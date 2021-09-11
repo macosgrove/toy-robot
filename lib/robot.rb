@@ -49,9 +49,7 @@ class Robot
   end
 
   def report
-    raise RobotCommandError, "Robot's position is undefined. PLACE the robot first." unless placed?
-
-    "#{@x},#{@y},#{@facing.to_s.upcase}"
+    placed? ? "#{@x},#{@y},#{@facing.to_s.upcase}" : nil
   end
 
   private

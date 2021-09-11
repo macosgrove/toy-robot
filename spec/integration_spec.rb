@@ -105,4 +105,20 @@ describe "Application integration" do
       expect(output.string).to eq "Robot will not move past edge of table to [4,5]\n3,4,WEST\n"
     end
   end
+
+  describe "Extension examples" do
+    it "allows automatic reporting to be turned on at any time" do
+      input.puts "REPORTING_ON"
+      input.puts "PLACE 1,2,EAST"
+      input.puts "MOVE"
+      input.puts "LEFT"
+      input.puts "REPORTING_OFF"
+      input.puts "RIGHT"
+
+      input.rewind
+      toy_robot.run
+
+      expect(output.string).to eq "Reporting is on\n\n1,2,EAST\n2,2,EAST\n2,2,NORTH\nReporting is off\n"
+    end
+  end
 end

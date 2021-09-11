@@ -56,10 +56,14 @@ describe Robot do
   end
 
   context "Before the robot has been PLACEd" do
-    %i[report move left].each do |command|
+    %i[move left right].each do |command|
       it "raises an exception if #{command} is attempted" do
         expect { robot.send(command) }.to raise_error "Robot's position is undefined. PLACE the robot first."
       end
+    end
+
+    it "does not raise an exception if REPORT is attempted" do
+      expect(robot.report).to be_nil
     end
   end
 end
