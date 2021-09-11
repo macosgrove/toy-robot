@@ -103,3 +103,15 @@ Here are some ideas for additional commands:
 - OBSTACLE x,y - place an obstacle (coffee cup, vase of flowers) at a location on the table
 
 The Rake task could be extended to take parameters, eg verbose mode, reporting mode, table size, an input file.
+
+### Patterns and Principles
+
+The following patterns and principles have been used in this application:
+
+- Test driven development
+- Single responsibility principle
+- Dependency injection
+- Builder pattern (Factory class)
+- Chain of Responsibility pattern (Interpreter class)
+
+and I'm sure there are others.
