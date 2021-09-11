@@ -36,9 +36,11 @@ describe "Application integration" do
 
   describe "supplied examples" do
     it "passes example (a)" do
-      input.puts "PLACE 0,0,NORTH"
-      input.puts "MOVE"
-      input.puts "REPORT"
+      input.write <<~IN
+        PLACE 0,0,NORTH
+        MOVE
+        REPORT
+      IN
 
       input.rewind
       toy_robot.run
@@ -47,9 +49,11 @@ describe "Application integration" do
     end
 
     it "passes example (b)" do
-      input.puts "PLACE 0,0,NORTH"
-      input.puts "LEFT"
-      input.puts "REPORT"
+      input.write <<~IN
+        PLACE 0,0,NORTH
+        LEFT
+        REPORT
+      IN
 
       input.rewind
       toy_robot.run
@@ -58,12 +62,14 @@ describe "Application integration" do
     end
 
     it "passes example (c)" do
-      input.puts "PLACE 1,2,EAST"
-      input.puts "MOVE"
-      input.puts "MOVE"
-      input.puts "LEFT"
-      input.puts "MOVE"
-      input.puts "REPORT"
+      input.write <<~IN
+        PLACE 1,2,EAST
+        MOVE
+        MOVE
+        LEFT
+        MOVE
+        REPORT
+      IN
 
       input.rewind
       toy_robot.run
@@ -75,16 +81,18 @@ describe "Application integration" do
   describe "More complex examples" do
     before { toy_robot.verbose = true }
     it "can turn right as well as left" do
-      input.puts "PLACE 1,2,EAST"
-      input.puts "MOVE"
-      input.puts "MOVE"
-      input.puts "RIGHT"
-      input.puts "MOVE"
-      input.puts "RIGHT"
-      input.puts "MOVE"
-      input.puts "LEFT"
-      input.puts "MOVE"
-      input.puts "REPORT"
+      input.write <<~IN
+        PLACE 1,2,EAST
+        MOVE
+        MOVE
+        RIGHT
+        MOVE
+        RIGHT
+        MOVE
+        LEFT
+        MOVE
+        REPORT
+      IN
 
       input.rewind
       toy_robot.run
@@ -93,32 +101,46 @@ describe "Application integration" do
     end
 
     it "ignores commands that would have it fall off the table" do
-      input.puts "PLACE 4,4,NORTH"
-      input.puts "MOVE"
-      input.puts "LEFT"
-      input.puts "MOVE"
-      input.puts "REPORT"
+      input.write <<~IN
+        PLACE 4,4,NORTH
+        MOVE
+        LEFT
+        MOVE
+        REPORT
+      IN
 
       input.rewind
       toy_robot.run
 
-      expect(output.string).to eq "Robot will not move past edge of table to [4,5]\n3,4,WEST\n"
+      expect(output.string).to eq <<~OUT
+        Robot will not move past edge of table to [4,5]
+        3,4,WEST
+      OUT
     end
   end
 
   describe "Extension examples" do
     it "allows automatic reporting to be turned on at any time" do
-      input.puts "REPORTING_ON"
-      input.puts "PLACE 1,2,EAST"
-      input.puts "MOVE"
-      input.puts "LEFT"
-      input.puts "REPORTING_OFF"
-      input.puts "RIGHT"
+      input.write <<~IN
+        REPORTING_ON
+        PLACE 1,2,EAST
+        MOVE
+        LEFT
+        REPORTING_OFF
+        RIGHT
+      IN
 
       input.rewind
       toy_robot.run
 
-      expect(output.string).to eq "Reporting is on\n\n1,2,EAST\n2,2,EAST\n2,2,NORTH\nReporting is off\n"
+      expect(output.string).to eq <<~OUT
+        Reporting is on
+
+        1,2,EAST
+        2,2,EAST
+        2,2,NORTH
+        Reporting is off
+      OUT
     end
   end
 end
