@@ -37,7 +37,8 @@ REPORT
 - A robot that is not on the table can choose to ignore the MOVE, LEFT, RIGHT
   and REPORT commands.
 - Input can be from a file, or from standard input.
-- Provide test data to exercise the application.
+
+The application is excercised through unit tests and test data supplied in an integration spec.
 
 ### Initial setup
 
@@ -85,19 +86,20 @@ Output: `3,3,NORTH`
 
 The following extension commands have been implemented:
 
-  QUIT - terminate the application
+- QUIT - terminate the application
 
 ### Further extensions
 
 Here are some ideas for additional commands:
 
-  HELP - list all available commands
-  MAP - show a map of the table top
-  MAP_ON - always show the map after each command
-  MAP_OFF - stop showing the map after each command
-  REPORT_ON - always report after each command
-  REPORT_OFF - stop reporting after each command
-  OBSTACLE x,y - place an obstacle (coffee cup, vase of flowers) at a location on the table
-  VERBOSE_ON - report errors in the output
-  VERBOSE_OFF - ignore errors
-  
+- HELP - list all available commands
+- MAP - show a map of the table top
+- MAP_ON - always show the map after each command
+- MAP_OFF - stop showing the map after each command
+- REPORT_ON - always report after each command
+- REPORT_OFF - stop reporting after each command
+- OBSTACLE x,y - place an obstacle (coffee cup, vase of flowers) at a location on the table
+- VERBOSE_ON - report errors in the output
+- VERBOSE_OFF - ignore errors  
+
+The Rake task could be extended to take parameters, eg verbose mode, reporting mode, table size, an input file.
