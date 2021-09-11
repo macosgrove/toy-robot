@@ -47,5 +47,17 @@ describe ToyRobot do
         end
       end
     end
+
+    context "When report mode is turned on" do
+      before do
+        toy_robot.reporting = true
+        allow(interpreter).to receive(:process).with("report").and_return("report")
+      end
+
+      it "automatically reports after every command" do
+        toy_robot.run
+        expect(output.string).to eq "one\nreport\ntwo\nreport\nthree\nreport\n"
+      end
+    end
   end
 end
