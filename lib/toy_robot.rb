@@ -4,12 +4,12 @@ require_relative "factory"
 
 # Entry point. Responsible for calling the Factory to initialise the system, then running the input loop.
 class ToyRobot
-  attr_accessor :verbose, :reporting
+  attr_accessor :verbose, :reporting, :output
 
   def initialize(input_stream, output_stream)
     @input = input_stream
     @output = output_stream
-    @interpreter = Factory.new.build
+    @interpreter = Factory.new.build(self)
     @verbose = false
     @reporting = false
   end
@@ -29,5 +29,5 @@ class ToyRobot
 
   private
 
-  attr :input, :output, :interpreter
+  attr :input, :interpreter
 end

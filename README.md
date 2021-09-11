@@ -87,6 +87,10 @@ Output: `3,3,NORTH`
 The following extension commands have been implemented:
 
 - QUIT - terminate the application
+- REPORTING_ON - always report after each command
+- REPORTING_OFF - stop reporting after each command
+- VERBOSE_ON - report errors in the output
+- VERBOSE_OFF - ignore errors 
 
 ### Further extensions
 
@@ -96,10 +100,6 @@ Here are some ideas for additional commands:
 - MAP - show a map of the table top
 - MAP_ON - always show the map after each command
 - MAP_OFF - stop showing the map after each command
-- REPORT_ON - always report after each command
-- REPORT_OFF - stop reporting after each command
 - OBSTACLE x,y - place an obstacle (coffee cup, vase of flowers) at a location on the table
-- VERBOSE_ON - report errors in the output
-- VERBOSE_OFF - ignore errors  
 
 The Rake task could be extended to take parameters, eg verbose mode, reporting mode, table size, an input file.
