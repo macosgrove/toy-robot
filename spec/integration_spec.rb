@@ -23,14 +23,14 @@ describe "Application integration" do
 
   context "When location and direction are specified for the PLACE" do
     before do
-      input.puts "PLACE 1,5,EAST"
+      input.puts "PLACE 1,4,EAST"
       input.puts "REPORT"
       input.rewind
     end
 
     it "places the robot according to the parameters" do
       toy_robot.run
-      expect(output.string).to eq "1,5,EAST\n"
+      expect(output.string).to eq "1,4,EAST\n"
     end
   end
 
@@ -90,6 +90,19 @@ describe "Application integration" do
       toy_robot.run
 
       expect(output.string).to eq "2,0,SOUTH\n"
+    end
+
+    it "ignores commands that would have it fall off the table" do
+      input.puts "PLACE 4,4,NORTH"
+      input.puts "MOVE"
+      input.puts "LEFT"
+      input.puts "MOVE"
+      input.puts "REPORT"
+
+      input.rewind
+      toy_robot.run
+
+      expect(output.string).to eq "Robot will not move past edge of table to [4,5]\n3,4,WEST\n"
     end
   end
 end

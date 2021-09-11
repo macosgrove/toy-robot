@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 require_relative "../lib/robot"
+require_relative "../lib/table"
 
 describe Robot do
-  subject(:robot) { described_class.new }
+  let(:table) { instance_double(Table, valid_location?: true) }
+  subject(:robot) { described_class.new(table) }
 
   describe "#place" do
     it "returns nil" do
@@ -19,6 +21,14 @@ describe Robot do
 
     it "raises an error when the direction is uninterpretable" do
       expect { robot.place(1, 3, "Nantucket") }.to raise_error "Robot does not understand direction [Nantucket]."
+    end
+
+    context "when the location is outside the table boundaries" do
+      before { allow(table).to receive(:valid_location?).and_return(false) }
+
+      it "raises an error when the location is outside the table boundaries" do
+        expect { robot.place(99, 99) }.to raise_error(/Robot cannot be placed/)
+      end
     end
   end
 

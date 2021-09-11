@@ -1,19 +1,15 @@
 # frozen_string_literal: true
 
-require_relative "interpreter"
-require_relative "robot"
-require_relative "quitter"
+require_relative "factory"
 
-# Entry point. Responsible for system intialisation and running the input loop.
+# Entry point. Responsible for calling the Factory to initialise the system, then running the input loop.
 class ToyRobot
   attr_accessor :verbose
 
   def initialize(input_stream, output_stream)
     @input = input_stream
     @output = output_stream
-    @interpreter = Interpreter.new
-    @interpreter.add_handler(Robot.new)
-    @interpreter.add_handler(Quitter.new)
+    @interpreter = Factory.new.build
     @verbose = false
   end
 

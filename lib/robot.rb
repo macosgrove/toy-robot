@@ -3,9 +3,18 @@
 class RobotCommandError < StandardError; end
 
 class Robot
+  def initialize(table)
+    @table = table
+  end
+
   def place(x = "0", y = "0", facing = "north") # rubocop:disable Naming/MethodParameterName
     @x = x.to_i
     @y = y.to_i
+
+    unless table.valid_location?(@x, @y)
+      raise RobotCommandError, "Robot cannot be placed at [#{@x},#{@y}]: it is outside table boundaries."
+    end
+
     @facing = get_direction(facing)
     nil
   end
@@ -13,8 +22,15 @@ class Robot
   def move
     raise RobotCommandError, "Robot's position is undefined. PLACE the robot first." unless placed?
 
-    @x += MOVE_VECTORS[@facing][0]
-    @y += MOVE_VECTORS[@facing][1]
+    new_x = @x + MOVE_VECTORS[@facing][0]
+    new_y = @y + MOVE_VECTORS[@facing][1]
+
+    unless table.valid_location?(new_x, new_y)
+      raise RobotCommandError, "Robot will not move past edge of table to [#{new_x},#{new_y}]"
+    end
+
+    @x = new_x
+    @y = new_y
     nil
   end
 
@@ -39,6 +55,8 @@ class Robot
   end
 
   private
+
+  attr :table
 
   def placed?
     @x && @y && @facing
