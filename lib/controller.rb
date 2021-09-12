@@ -30,4 +30,15 @@ class Controller
     @app.reporting = false
     "Reporting is off"
   end
+
+  def help
+    <<~HELP
+      Application commands:
+        REPORTING_ON - always report after each command
+        REPORTING_OFF - stop reporting after each command
+        VERBOSE_ON - report errors in the output
+        VERBOSE_OFF - ignore errors
+        QUIT - terminate the application
+    HELP
+  end
 end

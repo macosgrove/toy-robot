@@ -52,6 +52,17 @@ class Robot
     placed? ? "#{@x},#{@y},#{@facing.to_s.upcase}" : nil
   end
 
+  def help
+    <<~HELP
+      Robot commands:
+        PLACE <x>,<y>,<facing> - place the robot on the table
+        MOVE - move the toy robot one unit forward
+        LEFT - turn 90 degrees left
+        RIGHT - turn 90 degrees right
+        REPORT - report the robot's position
+    HELP
+  end
+
   private
 
   attr :table

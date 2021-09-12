@@ -142,5 +142,17 @@ describe "Application integration" do
         Reporting is off
       OUT
     end
+
+    it "lists available commands with HELP" do
+      input.puts "HELP"
+      input.rewind
+      toy_robot.run
+
+      output.rewind
+      help = output.readlines
+
+      expect(help).to include "  REPORTING_ON - always report after each command\n"
+      expect(help).to include "  MOVE - move the toy robot one unit forward\n"
+    end
   end
 end

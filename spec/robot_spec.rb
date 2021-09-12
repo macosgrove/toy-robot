@@ -66,4 +66,11 @@ describe Robot do
       expect(robot.report).to be_nil
     end
   end
+
+  describe "help" do
+    it "lists the available robot commands", :aggregate_failures do
+      expect(robot.help).to include "MOVE - move the toy robot one unit forward"
+      expect(robot.help).to include "PLACE <x>,<y>,<facing> - place the robot on the table"
+    end
+  end
 end

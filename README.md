@@ -86,17 +86,17 @@ Output: `3,3,NORTH`
 
 The following extension commands have been implemented:
 
-- QUIT - terminate the application
+- HELP - list all available commands
 - REPORTING_ON - always report after each command
 - REPORTING_OFF - stop reporting after each command
 - VERBOSE_ON - report errors in the output
 - VERBOSE_OFF - ignore errors 
+- QUIT - terminate the application
 
 ### Further extensions
 
 Here are some ideas for additional commands:
 
-- HELP - list all available commands
 - MAP - show a map of the table top
 - MAP_ON - always show the map after each command
 - MAP_OFF - stop showing the map after each command
@@ -106,9 +106,10 @@ The Rake task could be extended to take parameters, eg verbose mode, reporting m
 
 ### Patterns and Principles
 
-The following patterns and principles have been used in this application:
+The following patterns, principles and practices have been used in this application:
 
 - Test driven development
+- Self documenting code
 - Single responsibility principle
 - Dependency injection
 - Builder pattern (Factory class)
