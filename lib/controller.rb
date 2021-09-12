@@ -31,9 +31,21 @@ class Controller
     "Reporting is off"
   end
 
+  def mapping_on
+    @app.mapping = true
+    "Mapping is on"
+  end
+
+  def mapping_off
+    @app.mapping = false
+    "Mapping is off"
+  end
+
   def help
     <<~HELP
       Application commands:
+        MAPPING_ON - always map after each command
+        MAPPING_OFF - stop mapping after each command
         REPORTING_ON - always report after each command
         REPORTING_OFF - stop reporting after each command
         VERBOSE_ON - report errors in the output

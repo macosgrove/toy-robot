@@ -59,5 +59,17 @@ describe ToyRobot do
         expect(output.string).to eq "one\nreport\ntwo\nreport\nthree\nreport\n"
       end
     end
+
+    context "When mapping mode is turned on" do
+      before do
+        toy_robot.mapping = true
+        allow(interpreter).to receive(:process).with("map").and_return("map")
+      end
+
+      it "automatically maps after every command" do
+        toy_robot.run
+        expect(output.string).to eq "one\nmap\ntwo\nmap\nthree\nmap\n"
+      end
+    end
   end
 end
