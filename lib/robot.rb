@@ -3,11 +3,13 @@
 class RobotCommandError < StandardError; end
 
 class Robot
+  attr :x, :y
+
   def initialize(table)
     @table = table
   end
 
-  def place(x = "0", y = "0", facing = "north") # rubocop:disable Naming/MethodParameterName
+  def place(x = "0", y = "0", facing = "north")
     @x = x.to_i
     @y = y.to_i
 
@@ -16,6 +18,7 @@ class Robot
     end
 
     @facing = get_direction(facing)
+    table.add_robot(self)
     nil
   end
 
@@ -63,6 +66,10 @@ class Robot
     HELP
   end
 
+  def to_c
+    COMPASS_CHARS[@facing]
+  end
+
   private
 
   attr :table
@@ -92,6 +99,14 @@ class Robot
       east: [1, 0],
       south: [0, -1],
       west: [-1, 0]
+    }.freeze
+
+  COMPASS_CHARS =
+    {
+      north: "^",
+      east: ">",
+      south: "v",
+      west: "<"
     }.freeze
 
   COMPASS = %i[north east south west].freeze

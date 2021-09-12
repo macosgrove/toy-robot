@@ -7,9 +7,11 @@ require_relative "controller"
 
 class Factory
   def build(toy_robot)
-    interpreter = Interpreter.new
-    interpreter.add_handler(Robot.new(Table.new))
-    interpreter.add_handler(Controller.new(toy_robot))
-    interpreter
+    table = Table.new
+    Interpreter.new.tap do |interpreter|
+      interpreter.add_handler(table)
+      interpreter.add_handler(Robot.new(table))
+      interpreter.add_handler(Controller.new(toy_robot))
+    end
   end
 end

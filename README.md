@@ -87,6 +87,7 @@ Output: `3,3,NORTH`
 The following extension commands have been implemented:
 
 - HELP - list all available commands
+- MAP - display a map showing the location and direction of the robot
 - REPORTING_ON - always report after each command
 - REPORTING_OFF - stop reporting after each command
 - VERBOSE_ON - report errors in the output
@@ -97,7 +98,6 @@ The following extension commands have been implemented:
 
 Here are some ideas for additional commands:
 
-- MAP - show a map of the table top
 - MAP_ON - always show the map after each command
 - MAP_OFF - stop showing the map after each command
 - OBSTACLE x,y - place an obstacle (coffee cup, vase of flowers) at a location on the table

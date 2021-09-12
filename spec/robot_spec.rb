@@ -4,7 +4,7 @@ require_relative "../lib/robot"
 require_relative "../lib/table"
 
 describe Robot do
-  let(:table) { instance_double(Table, valid_location?: true) }
+  let(:table) { instance_double(Table, valid_location?: true, add_robot: nil) }
   subject(:robot) { described_class.new(table) }
 
   describe "#place" do
