@@ -39,4 +39,21 @@ describe Interpreter do
       expect(interpreter.process("test")).to eq "Unknown command [test]"
     end
   end
+
+  context "when multiple handlers can handle the same command" do
+    let(:test_handler1) { double(test: "Test response 1\n") }
+    let(:test_handler2) { double(test: "Test response 2\n") }
+
+    before do
+      interpreter.add_handler(test_handler1)
+      interpreter.add_handler(test_handler2)
+    end
+
+    it "collects all the commands and returns the lot" do
+      expect(interpreter.process("test")).to eq <<~OUT
+        Test response 1
+        Test response 2
+      OUT
+    end
+  end
 end

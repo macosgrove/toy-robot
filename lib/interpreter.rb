@@ -11,10 +11,16 @@ class Interpreter
 
   def process(original_command)
     command, args = parse_command(original_command)
+    responses = []
     @handlers.each do |handler|
-      return handler.send(command.to_sym, *args) if handler.respond_to?(command.to_sym)
+      next unless handler.respond_to?(command.to_sym)
+
+      responses << handler.send(command.to_sym, *args)
     end
-    "Unknown command [#{command}]"
+    return "Unknown command [#{command}]" if responses.empty?
+    return nil if responses.compact.empty?
+
+    responses.join
   end
 
   private
